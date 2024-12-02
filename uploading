@@ -1,0 +1,16 @@
+  DATA: t_file     TYPE filetable,
+        t_data_tab TYPE stringtab,
+        v_rc       TYPE i.
+
+  cl_gui_frontend_services=>file_open_dialog(
+    CHANGING
+      file_table              = t_file                 " Table Holding Selected Files
+      rc                      = v_rc                 " Return Code, Number of Files or -1 If Error Occurred
+  ).
+
+  cl_gui_frontend_services=>gui_upload(
+     EXPORTING
+       filename                = VALUE #( t_file[ 1 ]-filename OPTIONAL )            " Name of file
+    CHANGING
+      data_tab                = t_data_tab                 " Transfer table for file contents
+  ).
