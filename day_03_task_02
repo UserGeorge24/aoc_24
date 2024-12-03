@@ -32,13 +32,8 @@
 
   LOOP AT t_matches ASSIGNING FIELD-SYMBOL(<fs_pos>).
 
-    IF <fs_pos>-line EQ 0.
-      v_dont = abap_true.
-    ENDIF.
-
-    IF <fs_pos>-line EQ 1.
-      v_dont = abap_false.
-    ENDIF.
+    v_dont = COND #( WHEN <fs_pos>-line = 0 THEN abap_true  ELSE v_dont ).
+    v_dont = COND #( WHEN <fs_pos>-line = 1 THEN abap_false ELSE v_dont ).
 
     CHECK v_dont EQ abap_false AND <fs_pos>-line EQ 2.
 
