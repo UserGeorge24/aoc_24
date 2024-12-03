@@ -14,17 +14,13 @@ CLASS lcl DEFINITION.
                                                 num_02 TYPE i
                                                 v_inc  TYPE boolean
                                       RETURNING VALUE(r_val) TYPE boolean.
-
 ENDCLASS.
 
 CLASS lcl IMPLEMENTATION.
 
   METHOD remove_element.
-
     t_levels = t_levels_ori.
-
     DELETE t_levels INDEX i_index.
-
   ENDMETHOD.
 
   METHOD is_safe.
@@ -64,7 +60,6 @@ CLASS lcl IMPLEMENTATION.
         r_val = abap_false.
         RETURN.
       ENDIF.
-
     ENDLOOP.
 
     r_val = abap_true.
@@ -72,16 +67,12 @@ CLASS lcl IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD is_diff_morethan_3.
-
     r_val = COND #( WHEN abs( num_01 - num_02 ) BETWEEN 1 AND 3 THEN abap_false ELSE abap_true ).
-
   ENDMETHOD.
 
   METHOD is_against_sort_rule.
-
     r_val = COND #( WHEN v_inc EQ abap_true  AND num_01 GE num_02 THEN abap_true
                     WHEN v_inc EQ abap_false AND num_01 LE num_02 THEN abap_true  ).
-
   ENDMETHOD.
 
 ENDCLASS.
@@ -95,7 +86,6 @@ ENDCLASS.
     lcl=>t_levels = lcl=>t_levels_ori.
 
     DO LINES( lcl=>t_levels_ori ) + 1 TIMES.
-
       IF lcl=>is_safe(  ).
         v_sum += 1.
         EXIT.
