@@ -1,6 +1,6 @@
-  LOOP AT t_data_tab ASSIGNING FIELD-SYMBOL(<fs_src>).
-    v_src = |{ v_src }{ to_lower( <fs_src> ) }|.
-  ENDLOOP.
+  v_src = REDUCE #( INIT v_init TYPE string
+                    FOR <fs_row> IN t_data_tab
+                    NEXT v_init = |{ v_init }{ to_lower( <fs_row> ) }| ).
 
   FIND ALL OCCURRENCES OF REGEX 'mul\([0-9]{1,3},[0-9]{1,3}\)' IN v_src RESULTS DATA(results).
 
