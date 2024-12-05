@@ -3,14 +3,11 @@ CLASS lcl DEFINITION.
     TYPES: BEGIN OF ty_page_ord_rules,
             first  TYPE n LENGTH 2,
             second TYPE n LENGTH 2,
-           END OF ty_page_ord_rules,
-           tty_page_ord_rules TYPE TABLE OF ty_page_ord_rules.
+           END OF ty_page_ord_rules.
 
     DATA: t_data_tab       TYPE stringtab,
           t_page_ord_rules TYPE TABLE OF ty_page_ord_rules,
-          t_find           TYPE TABLE OF ty_page_ord_rules,
           t_updates        TYPE stringtab,
-          t_update         TYPE stringtab,
           t_proper_updates TYPE stringtab.
 
     METHODS: split_two_section,
@@ -29,7 +26,9 @@ CLASS lcl IMPLEMENTATION.
 
   METHOD collect_proper_updates.
 
-    DATA v_exit TYPE boolean.
+    DATA: t_update TYPE stringtab,
+          t_find   TYPE TABLE OF ty_page_ord_rules,
+          v_exit   TYPE boolean.
 
     LOOP AT t_updates ASSIGNING FIELD-SYMBOL(<fs_updates>).
 
